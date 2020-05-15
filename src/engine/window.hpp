@@ -1,8 +1,12 @@
 #ifndef WINDOW_CONTEXT_HPP
 #define WINDOW_CONTEXT_HPP
 
-#include "lib_base.hpp"
+#include "settings.hpp"
+
 #include <glfw/glfw3.h>
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_glfw_gl3.h>
+
 #include <functional>
 #include <utility>
 
@@ -13,7 +17,6 @@ typedef struct WindowSettings{
     uint_tp height; 
     std::string windowName;
     int_tp swapInterval;
-    vec2_tp openglVersion;
 } WindowSettings;
 
 class Window{
@@ -26,7 +29,6 @@ public:
     void init();
     void clear();
     void flush();
-    void poll();
     void close();
     bool isClosed();
 

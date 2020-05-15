@@ -17,8 +17,8 @@ void Window::init() {
         ASSERT(false, "Unable to initalize Window Library");
 
     /* Create a windowed mode window and its OpenGL context */
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, m_settings.openglVersion.x);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, m_settings.openglVersion.y);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, OPENGL_VERSION.x);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, OPENGL_VERSION.y);
     m_window = glfwCreateWindow(m_settings.width, m_settings.height, m_settings.windowName.c_str(), NULL, NULL);
     if (!m_window)
     {
@@ -31,24 +31,46 @@ void Window::init() {
     glfwSwapInterval(m_settings.swapInterval);
     std::cout << "Window library initalized succesfully! " << std::endl;
     initGraphicLib();
+
+    if (ENABLE_DEBUG_WINDOW){
+        ImGui::CreateContext();
+        ImGui_ImplGlfwGL3_Init(m_window, true);
+        ImGui::StyleColorsDark();
+    }
 }
 
 void Window::clear() {
     glClear(GL_COLOR_BUFFER_BIT);
+
+    if (ENABLE_DEBUG_WINDOW){
+        ImGui_ImplGlfwGL3_NewFrame();
+    }
 }
 
 void Window::flush(){
+
+    if (ENABLE_DEBUG_WINDOW){
+        ImGui::Render();
+        ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+    }
+
     /* Swap front and back buffers */
     glfwSwapBuffers(m_window);
-}
 
-void Window::poll(){
     /* Poll for and process events */
     glfwPollEvents();
 }
 
 void Window::close() {
+
+    if (ENABLE_DEBUG_WINDOW){
+        ImGui_ImplGlfwGL3_Shutdown();
+        ImGui::DestroyContext();
+        std::cout << "Sucessfully destroyed Debug Window" << std::endl;
+    }
+
     glfwTerminate();
+    std::cout << "Sucessfully destroyed Window" << std::endl;
 }
 
 bool Window::isClosed() {
