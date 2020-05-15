@@ -3,16 +3,16 @@
 int main(void)
 {
     Window window( WindowSettings{1280, 720, "The Wonders of Mazalt", 1, {4,5} } );
+
     SceneController controller( SceneControllerSettings{true}, window );
 
     auto exampleScene = std::make_shared<ExampleScene>();
 
     controller.add( "example", exampleScene );
-    controller.add( "example", exampleScene );
-    
+
     controller.init();
     controller.select("example");
-    /* Loop until the user closes the window */
+
     while (!window.isClosed())
     {
         window.clear();

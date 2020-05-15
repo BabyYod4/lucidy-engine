@@ -16,6 +16,8 @@ public:
     virtual void onUIRender(Window& t_window){};
     virtual void onDebugRender(Window& t_window){};
     virtual void onEvent(){};
+protected:
+    std::string selectScene;
 };
 
 typedef struct SceneControllerSettings{
