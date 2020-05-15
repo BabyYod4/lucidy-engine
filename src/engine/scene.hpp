@@ -2,15 +2,21 @@
 #define SCENE_HPP
 
 #include "window.hpp"
+
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_glfw_gl3.h>
+
 #include <memory>
 #include <unordered_map>
-#include <vector>
 #include <algorithm>
+
+typedef struct SceneControllerSettings{
+    bool_tp resetTimerAfterNewcene;
+} SceneControllerSettings;
 
 class Scene{
 public:
-    virtual void onInit(Window& t_window) = 0;
-    virtual void onCreate() = 0;
+    virtual void onCreate(Window& t_window) = 0;
     virtual void onDestroy() = 0;
     virtual void onRender(const float_tp& t_delta) = 0;
     virtual void onUIRender(Window& t_window){};
@@ -19,10 +25,6 @@ public:
 protected:
     std::string selectScene;
 };
-
-typedef struct SceneControllerSettings{
-    bool resetTimerAfterEachScene;
-} SceneControllerSettings;
 
 class SceneController{
 public:
@@ -33,20 +35,21 @@ public:
     void remove( const std::string& t_name );
     void select( const std::string& t_name );
     void run();
-    void init();
 
-    std::string getCurrent();
+    std::string getActiveScene();
 
 private:
+    bool_tp m_alreadyCreated;
     float_tp m_delta;
     SceneControllerSettings m_settings;
     Window& m_window;
 
     std::string m_currentSceneName;
     std::shared_ptr<Scene> m_currentScene;
-    
-    std::vector<std::string> m_sceneNames;
-    std::unordered_map< std::string, std::shared_ptr<Scene> > m_scenes;
+    std::unordered_map<std::string, std::shared_ptr<Scene>> m_scenes;
+
+    bool sceneExists(const std::string& t_name);
+
 };
 
 #endif // SCENE_HPP

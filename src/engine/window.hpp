@@ -26,6 +26,7 @@ public:
     void init();
     void clear();
     void flush();
+    void poll();
     void close();
     bool isClosed();
 

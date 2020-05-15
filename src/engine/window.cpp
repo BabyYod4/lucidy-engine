@@ -40,7 +40,9 @@ void Window::clear() {
 void Window::flush(){
     /* Swap front and back buffers */
     glfwSwapBuffers(m_window);
+}
 
+void Window::poll(){
     /* Poll for and process events */
     glfwPollEvents();
 }

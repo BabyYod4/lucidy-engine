@@ -6,21 +6,37 @@ int main(void)
 
     SceneController controller( SceneControllerSettings{true}, window );
 
-    auto exampleScene = std::make_shared<ExampleScene>();
+    auto scene1 = std::make_shared<ExampleScene>("Scene text 1");
+    auto scene2 = std::make_shared<ExampleScene>("Scene text 2");
 
-    controller.add( "example", exampleScene );
+    controller.add( "scene1", scene1 );
+    controller.add( "scene2", scene2 );
+    controller.select("scene2");
 
-    controller.init();
-    controller.select("example");
+    ImGui::CreateContext();
+    window.claim([](window_tp* w){ ImGui_ImplGlfwGL3_Init(w, true); });
+    ImGui::StyleColorsDark();
 
     while (!window.isClosed())
     {
-        window.clear();
-        
+        window.poll();
+        ImGui_ImplGlfwGL3_NewFrame();
+
         controller.run();
 
+        ImGui::Begin("Another Window 2");
+        ImGui::Text("Hello me workings");                           
+        ImGui::End();
+
+        window.clear();
+        ImGui::Render();
+        ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
         window.flush();
     }
+
+    ImGui_ImplGlfwGL3_Shutdown();
+    ImGui::DestroyContext();
+    std::cout << "Sucessfully destroyed Example Scene" << std::endl;
 
     return 0;
 }

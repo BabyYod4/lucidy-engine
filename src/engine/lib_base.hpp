@@ -14,7 +14,8 @@
 
 typedef GLuint uint_tp;
 typedef GLint int_tp;
-typedef float float_tp;
+typedef GLfloat float_tp;
+typedef bool bool_tp;
 typedef GLenum enum_tp;
 
 typedef glm::vec2 vec2_tp;
