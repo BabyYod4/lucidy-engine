@@ -1,68 +1,27 @@
-#include <iostream>
-#include <glew/glew.h>
-#include <glfw/glfw3.h>
-
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
-#include <imgui/imgui.h>
-#include <imgui/imgui_impl_glfw_gl3.h>
+#include <scenes/example_scene.hpp>
 
 int main(void)
 {
-    GLFWwindow* window;
+    Window window( WindowSettings{1280, 720, "The Wonders of Mazalt", 1, {4,5} } );
+    SceneController controller( SceneControllerSettings{true}, window );
 
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
+    auto exampleScene = std::make_shared<ExampleScene>();
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(1280, 720, "Hello World", NULL, NULL);
-    if (!window)
-    {
-        std::cout << "Error Could not initalized GLFW" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-
-    GLenum err = glewInit();
-    if (GLEW_OK != err){
-      std::cout << "Error Could not initalized GLEW" << std::endl;
-    }
-
-    glm::mat4 test = glm::ortho(0, 800, 0, 600, 0, 600);
-
-    ImGui::CreateContext();
-    ImGui_ImplGlfwGL3_Init(window, true);
-    ImGui::StyleColorsDark();
-
+    controller.add( "example", exampleScene );
+    controller.add( "example", exampleScene );
+    
+    controller.init();
+    controller.select("example");
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
+    while (!window.isClosed())
     {
+        window.clear();
         
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
-        ImGui_ImplGlfwGL3_NewFrame();
+        controller.run();
 
-        ImGui::Text("Hello, world!");                           
-
-        ImGui::Render();
-	    ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
-
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
-
-        /* Poll for and process events */
-        glfwPollEvents();
+        window.flush();
     }
 
-    ImGui_ImplGlfwGL3_Shutdown();
-    ImGui::DestroyContext();
-    glfwTerminate();
     return 0;
 }
 
