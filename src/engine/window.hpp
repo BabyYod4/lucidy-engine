@@ -2,13 +2,9 @@
 #define WINDOW_CONTEXT_HPP
 
 #include "settings.hpp"
-
 #include <glfw/glfw3.h>
-#include <imgui/imgui.h>
-#include <imgui/imgui_impl_glfw_gl3.h>
 
 #include <functional>
-#include <utility>
 
 typedef GLFWwindow window_tp;
 
@@ -26,11 +22,12 @@ public:
     Window(WindowSettings&& t_settings);
     ~Window();
 
-    void init();
-    void clear();
-    void flush();
+    void open();
     void close();
     bool isClosed();
+
+    void clear();
+    void flush();
 
     void claim(const std::function<void(window_tp*)>& task);
     void setSettings(WindowSettings&& t_settings);
@@ -39,9 +36,6 @@ public:
 private: 
     WindowSettings m_settings;
     window_tp* m_window;
-
-    void initGraphicLib();
-
 };
 
 #endif // !WINDOW_CONTEXT_HPP
