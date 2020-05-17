@@ -18,10 +18,10 @@ if( NOT CMAKE_BUILD_TYPE )
        FORCE )
 endif()
 
-## Install the executable to <install_directory>/bin
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+## Install the executable in this path
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build/bin/exe)
 
-## Install libraries (if any) to <install_directory>/bin
+## Install libraries (if any) in this path
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 
@@ -31,4 +31,4 @@ add_definitions(-DGLEW_STATIC)
 add_definitions(-D__CYGWIN__)
 
 ## Link Subdirectory 
-add_subdirectory(${PROJECT_SOURCE_DIR}/src bin)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src)

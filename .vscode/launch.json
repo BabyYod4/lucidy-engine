@@ -6,7 +6,7 @@
     "configurations": [
 
         {
-            "program": "${workspaceRoot}/bin/twom.exe",
+            "program": "${workspaceRoot}/build/bin/exe/twom.exe",
             "name": "C++ Launch",
             "type": "cppdbg",
             "request": "launch",

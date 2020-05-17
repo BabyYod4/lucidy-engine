@@ -9779,7 +9779,7 @@ static bool STB_TEXTEDIT_INSERTCHARS(STB_TEXTEDIT_STRING* obj, int pos, const Im
 #define STB_TEXTEDIT_K_SHIFT        0x20000
 
 #define STB_TEXTEDIT_IMPLEMENTATION
-#include <stb_image/stb_textedit.h>
+#include <stb/stb_textedit.h>
 
 }
 

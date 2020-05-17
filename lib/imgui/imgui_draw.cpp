@@ -100,7 +100,7 @@ namespace IMGUI_STB_NAMESPACE
 #ifdef IMGUI_STB_RECT_PACK_FILENAME
 #include IMGUI_STB_RECT_PACK_FILENAME
 #else
-#include <stb_image/stb_rect_pack.h>
+#include <stb/stb_rect_pack.h>
 #endif
 
 #ifndef IMGUI_DISABLE_STB_TRUETYPE_IMPLEMENTATION
@@ -115,7 +115,7 @@ namespace IMGUI_STB_NAMESPACE
 #ifdef IMGUI_STB_TRUETYPE_FILENAME
 #include IMGUI_STB_TRUETYPE_FILENAME
 #else
-#include <stb_image/stb_truetype.h>
+#include <stb/stb_truetype.h>
 #endif
 
 #ifdef __GNUC__

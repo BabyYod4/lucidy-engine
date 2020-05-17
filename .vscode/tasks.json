@@ -46,7 +46,7 @@
                 "combine",
                 "create"
             ],
-            "command": "${workspaceRoot}/bin/twom.exe",
+            "command": "${workspaceRoot}/build/bin/exe/twom.exe",
             "presentation": {
                 "reveal": "always",
                 "clear": true
