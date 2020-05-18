@@ -3,14 +3,10 @@
 
 #include <glew/glew.h>
 
-#include <cassert>
-#include <iostream>
-
-#include "types/data_types.hpp"
+#include "data_types.hpp"
+#include "logging.hpp"
 
 namespace ly{
-
-  #define ASSERT(x, msg) { if(!x){ std::cerr << msg << std::endl; assert(false); } }
 
   static inline void initGraphicLib(){
       enum_t err = glewInit();

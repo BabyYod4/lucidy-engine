@@ -2,8 +2,6 @@
 #define DEBUG_WINDOW_HPP
 
 #include "window.hpp"
-#include <imgui/imgui.h>
-#include <imgui/imgui_impl_glfw_gl3.h>
 
 namespace ly{
 

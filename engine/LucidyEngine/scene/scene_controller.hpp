@@ -27,7 +27,7 @@ namespace ly {
         std::string getActiveScene();
 
     private:
-        float_t m_delta;
+        float_t m_delta, m_currentTime, m_lastTime;
 
     #if SCENE_SELECTOR == ENABLE
         DebugWindow& m_debugWindow;

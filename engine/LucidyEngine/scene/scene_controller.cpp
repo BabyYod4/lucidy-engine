@@ -1,14 +1,17 @@
 #include "scene_controller.hpp"
+#include "../generic/logging.hpp"
 
 namespace ly {
 
 #if SCENE_SELECTOR == ENABLE
     SceneController::SceneController(DebugWindow& t_debugWindow):
+        m_delta(0.0f), m_currentTime(0.0f), m_lastTime(0.0f),
         m_currentSceneName(""),
         m_debugWindow(t_debugWindow)
     {}
 #else
     SceneController::SceneController():
+        m_delta(0.0f), m_currentTime(0.0f), m_lastTime(0.0f),
         m_currentSceneName("")
     {}
 #endif
@@ -23,6 +26,10 @@ namespace ly {
     }
 
     void SceneController::add(const string_t& t_name, Scene* t_scene) {
+        if (t_scene == nullptr){ 
+             std::cerr << "Unable to add scene[" << t_name << "] because it is invalid (nullptr or similar)" << std::endl;
+         }
+
         if ( sceneExists(t_name) ){
             std::cerr << "Unable to add scene[" << t_name << "] because it already exists" << std::endl;
             return;
@@ -57,7 +64,10 @@ namespace ly {
             std::cerr << "Unable to select scene[" << t_name << "] because it does not exists" << std::endl;
             return;
         }
-        if ( m_scenes.size() > 1 && m_currentSceneName != "" ){ m_scenes[m_currentSceneName]->onExit(); }
+        if ( m_scenes.size() > 1 && m_currentSceneName != "" ){ 
+            m_scenes[m_currentSceneName]->onExit();
+            m_scenes[t_name]->onEntry(); 
+        }
         m_currentSceneName = t_name;
         m_currentScene = m_scenes[t_name];
     }
@@ -68,11 +78,11 @@ namespace ly {
 
     void SceneController::run() {
         if( m_currentSceneName != ""){
-            m_delta = glfwGetTime();
-            m_currentScene->onEntry();
-            m_currentScene->onEvent();
-            m_currentScene->onRender(m_delta);
-            m_currentScene->onExit();
+            m_currentTime = glfwGetTime();
+            m_delta = m_currentTime - m_lastTime;
+            m_lastTime = m_currentTime;
+
+            m_currentScene->onUpdate(m_delta);
         }
 
     #if SCENE_SELECTOR == ENABLE

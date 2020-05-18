@@ -1,7 +1,7 @@
 #ifndef MESSAGE_BUS_HPP
 #define MESSAGE_BUS_HPP
 
-#include "../types/data_types.hpp"
+#include "../generic/data_types.hpp"
 
 #include <functional>
 #include <queue>

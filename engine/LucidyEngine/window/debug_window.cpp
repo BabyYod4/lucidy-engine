@@ -1,12 +1,14 @@
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_glfw_gl3.h>
+
 #include "debug_window.hpp"
+#include "../generic/logging.hpp"
 
 namespace ly{
 
     DebugWindow::DebugWindow(Window& t_window):
         m_window( t_window )
-    {
-        open(); 
-    }
+    {}
 
     DebugWindow::~DebugWindow() {
         close();

@@ -10,7 +10,7 @@ namespace ly{
     public:
         BusNode(MessageBus* t_messageBus){
             this->m_messageBus = t_messageBus;
-            this->m_messageBus->addReceiver( [this](Message t_message){ onMessageReceive(t_message); } );
+            this->m_messageBus->addReceiver( [this](Message t_message){ onEvent(t_message); } );
         }
 
     protected:
@@ -20,7 +20,7 @@ namespace ly{
             m_messageBus->sendMessage(t_message);
         }
 
-        virtual void onMessageReceive(Message& t_message){};
+        virtual void onEvent(Message& t_message){};
     };
 
 }
