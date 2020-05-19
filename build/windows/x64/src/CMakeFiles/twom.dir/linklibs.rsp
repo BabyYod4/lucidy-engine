@@ -1,1 +1,0 @@
- ../../../../lib/windows/x64/glew32s.lib ../../../../lib/windows/x64/libglfw3.a ../../../../lib/windows/x64/libimgui.a -lopengl32 ../../../../lib/windows/x64/libstb.a -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
