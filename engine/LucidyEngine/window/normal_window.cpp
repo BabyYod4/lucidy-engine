@@ -21,6 +21,7 @@ namespace ly{
         /* Create a windowed mode window and its OpenGL context */
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, GRAPHIC_LIB_VERSION_MAJOR );
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, GRAPHIC_LIB_VERSION_MINOR );
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         m_window = glfwCreateWindow(m_settings.width, m_settings.height, m_settings.windowName, NULL, NULL);
         glfwSetWindowUserPointer(m_window, this);
         

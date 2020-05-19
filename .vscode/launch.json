@@ -24,7 +24,7 @@
                         "ignoreFailures": true
                     }
                 ],
-                "program": "cd bin && twom.exe",
+                "program": "cd bin && twom",
             }
         }
     ]

@@ -16,7 +16,8 @@
 		"workbench.sideBar.location": "left",
 		"window.zoomLevel": 0,
 		"workbench.activityBar.visible": true,
-		"terminal.integrated.rightClickCopyPaste": true,
+		"terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+		"terminal.integrated.rightClickCopyPaste": false,
 		"files.associations": {
 			"iostream": "cpp",
 			"ostream": "cpp",
@@ -69,7 +70,7 @@
 		"C_Cpp.intelliSenseEngine": "Default",
 		"C_Cpp.errorSquiggles": "Enabled",
 		"files.exclude": {
-			"**/.gitignore": false,
+			"**/.gitignore": true,
 			"**/.vscode": false,
 			"**/build": false,
 			"**/imgui.ini": true

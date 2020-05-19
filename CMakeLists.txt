@@ -6,7 +6,7 @@ set( CMAKE_PREFIX_PATH $ENV{CMAKE_PREFIX_PATH} )
 
 ## Set global variables
 set ( PROJECT_NAME_ "twom" )
-set ( OS_TARGET_ "Windows" ) # Choose between "Linux" and "Windows"
+set ( OS_TARGET_ "Linux" ) # Choose between "Linux" and "Windows"
 set ( AT_TARGET_ "x64" ) # Choose between "x64" and "x86"
 
 ## Specify a project name
@@ -15,6 +15,9 @@ project( ${PROJECT_NAME_} )
 set( __LIB_PATH "" )
 set( __INCLUDE_PATH "" )
 set( __BIN_PATH "" )
+
+set( __GLEW_LIB_NAME "glew32s.lib" )
+set( __GLFW_LIB_NAME "libglfw3.a" )
 
 if (OS_TARGET_ MATCHES "Windows")
 
@@ -34,11 +37,14 @@ if (OS_TARGET_ MATCHES "Windows")
 endif()
 
 if (OS_TARGET_ MATCHES "Linux")
+  set( __GLEW_LIB_NAME "libGLEW.a" )
+  set( __GLFW_LIB_NAME "libglfw3.a" )
 
   if (AT_TARGET_ MATCHES "x64")
     set( __LIB_PATH ${PROJECT_SOURCE_DIR}/lib/linux/x64 )
     set( __INCLUDE_PATH ${PROJECT_SOURCE_DIR}/include/linux/x64 )
     set( __BIN_PATH ${PROJECT_SOURCE_DIR}/build/linux/x64/bin )
+
   endif()
 
   if (AT_TARGET_ MATCHES "x86")

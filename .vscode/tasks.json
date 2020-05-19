@@ -5,9 +5,9 @@
     "type": "shell",
     "presentation": { "reveal": "always" },
     "options": {
-        "cwd": "${workspaceRoot}/build/windows/x64"
+        // "cwd": "${workspaceRoot}/build/windows/x64"
         // "cwd": "${workspaceRoot}/build/windows/x86"
-        // "cwd": "${workspaceRoot}/build/linux/x64"
+        "cwd": "${workspaceRoot}/build/linux/x64"
         // "cwd": "${workspaceRoot}/build/linux/x86"
     },
     "tasks": [
@@ -50,7 +50,7 @@
                 "makeTask",
                 "executeTask"
             ],
-            "linux": { "command": "cd bin && ./twom.exe" },
+            "linux": { "command": "cd bin && ./twom" },
             "windows": { "command": "cd bin; ./twom.exe" },
             "presentation": {
                 "reveal": "always",

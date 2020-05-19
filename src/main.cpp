@@ -23,7 +23,7 @@ int main(void)
     controller.add( "scene1", &scene1 );
     controller.add( "scene2", &scene2 );
     controller.add( "scene3", &scene3 );
-    controller.select( "scene1" );
+    controller.select( "scene2" );
 
     while (!window.isClosed())
     {
@@ -31,7 +31,7 @@ int main(void)
         debugWindow.clear();
 
         controller.run();
-        
+
         debugWindow.flush();
         window.flush();
 
@@ -40,5 +40,3 @@ int main(void)
 
     return 0;
 }
-
-
