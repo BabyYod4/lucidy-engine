@@ -69,9 +69,10 @@
 		"C_Cpp.intelliSenseEngine": "Default",
 		"C_Cpp.errorSquiggles": "Enabled",
 		"files.exclude": {
-			"**/.gitignore": true,
+			"**/.gitignore": false,
 			"**/.vscode": false,
-			"**/build": false
+			"**/build": false,
+			"**/imgui.ini": true
 		}
 	},
 }

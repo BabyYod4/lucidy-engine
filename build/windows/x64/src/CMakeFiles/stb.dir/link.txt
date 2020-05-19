@@ -1,0 +1,2 @@
+C:\MinGW\x64\mingw64\bin\ar.exe qc ..\..\..\..\lib\windows\x64\libstb.a  CMakeFiles/stb.dir/__/lib/windows/x64/stb/stb_image.cpp.obj CMakeFiles/stb.dir/__/lib/windows/x64/stb/stb_vorbis.c.obj
+C:\MinGW\x64\mingw64\bin\ranlib.exe ..\..\..\..\lib\windows\x64\libstb.a
