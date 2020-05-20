@@ -6,7 +6,7 @@
     "configurations": [
 
         {
-            "program": "cd bin; twom.exe",
+            "program": "cd bin; lucidy-engine.exe",
             "name": "C++ Launch",
             "type": "cppdbg",
             "request": "launch",
@@ -24,7 +24,7 @@
                         "ignoreFailures": true
                     }
                 ],
-                "program": "cd bin && twom",
+                "program": "cd bin && lucidy-engine",
             }
         }
     ]

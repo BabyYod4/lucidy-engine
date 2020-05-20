@@ -50,8 +50,8 @@
                 "makeTask",
                 "executeTask"
             ],
-            "linux": { "command": "cd bin && ./twom" },
-            "windows": { "command": "cd bin; ./twom.exe" },
+            "linux": { "command": "cd bin && ./lucidy-engine" },
+            "windows": { "command": "cd bin; ./lucidy-engine.exe" },
             "presentation": {
                 "reveal": "always",
                 "clear": true
