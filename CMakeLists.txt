@@ -6,7 +6,7 @@ set( CMAKE_PREFIX_PATH $ENV{CMAKE_PREFIX_PATH} )
 
 ## Set global variables
 set ( PROJECT_NAME_ "twom" )
-set ( OS_TARGET_ "Linux" ) # Choose between "Linux" and "Windows"
+set ( OS_TARGET_ "Windows" ) # Choose between "Linux" and "Windows"
 set ( AT_TARGET_ "x64" ) # Choose between "x64" and "x86"
 
 ## Specify a project name
