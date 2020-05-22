@@ -65,14 +65,17 @@
 			"tuple": "cpp",
 			"utility": "cpp",
 			"sstream": "cpp",
-			"cinttypes": "cpp"
+			"cinttypes": "cpp",
+			"ctime": "cpp",
+			"map": "cpp",
+			"iomanip": "cpp"
 		},
 		"C_Cpp.intelliSenseEngine": "Default",
 		"C_Cpp.errorSquiggles": "Enabled",
 		"files.exclude": {
 			"**/.gitignore": true,
 			"**/.vscode": false,
-			"**/build": false,
+			"**/build": true,
 			"**/imgui.ini": true
 		}
 	},

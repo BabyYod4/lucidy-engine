@@ -14,7 +14,11 @@ namespace ly{
         m_text(t_text),
         m_message("No Messages Received"),
         m_debugWindow(t_debugWindow)
-    {}
+    {
+        #if SCENE_SELECTOR == ENABLE
+        setSceneName( t_text );
+        #endif 
+    }
 
     void ExampleReceiverScene::onUpdate(const float_t& t_delta) {
         m_debugWindow.drawStart( m_text );
@@ -29,6 +33,7 @@ namespace ly{
     }
     /// ===============================================================================
 
+
     /// ExampleSenderScene
     ExampleSenderScene::ExampleSenderScene(
         DebugWindow& t_debugWindow, 
@@ -39,28 +44,38 @@ namespace ly{
         m_text(t_text),
         m_debugWindow(t_debugWindow)
     {
-        
+        #if SCENE_SELECTOR == ENABLE
+        setSceneName( t_text );
+        #endif 
     }
 
     void ExampleSenderScene::onUpdate(const float_t& t_delta) {
         m_debugWindow.drawStart( m_text );
-        bool pressed = m_debugWindow.drawButton("Click ME to send time to Scene 1");
+        bool pressed = m_debugWindow.drawButton("Click ME");
         if (pressed){ sendMessage( Message(t_delta) ); }
         m_debugWindow.drawEnd();    
     }
     /// ===============================================================================
 
+
+    /// ExampleMouseEventScene
     ExampleMouseScene::ExampleMouseScene(Window& t_window, DebugWindow& t_debugWindow):
         m_window(t_window),
         m_debugWindow(t_debugWindow)
-    {}
+    {
+        #if SCENE_SELECTOR == ENABLE
+        setSceneName( "Mouse Event Scene" );
+        #endif 
+    }
 
     void ExampleMouseScene::onUpdate(const float_t& t_delta) {
-        m_debugWindow.drawStart( "Mouse position Callback test" );
+        m_debugWindow.drawStart( "Mouse Event Scene" );
         m_debugWindow.drawText( vec2ToString( m_window.getMousePos() ).c_str() );
         m_debugWindow.drawText( vec2ToString( m_window.getScrollLevel() ).c_str() );
         m_debugWindow.drawEnd();    
     }
+    /// ===============================================================================
+
 
 
 } // Namespace END

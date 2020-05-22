@@ -15,15 +15,19 @@ int main(void)
     ly::initGraphicLib();
     debugWindow.open();
 
+#if SCENE_SELECTOR == ENABLE
     ly::SceneController controller( debugWindow );
-    ly::ExampleReceiverScene scene1( debugWindow, &messageBus, "Scene text 1" );
-    ly::ExampleSenderScene scene2( debugWindow, &messageBus, "Scene text 2" );
+#else
+    ly::SceneController controller;
+#endif
+
+    ly::ExampleReceiverScene scene1( debugWindow, &messageBus, "Receiver Scene" );
+    ly::ExampleSenderScene scene2( debugWindow, &messageBus, "Sender Scene" );
     ly::ExampleMouseScene scene3( window, debugWindow );
 
-    controller.add( "scene1", &scene1 );
-    controller.add( "scene2", &scene2 );
-    controller.add( "scene3", &scene3 );
-    controller.select( "scene2" );
+    controller.addScene( &scene1 );
+    controller.addScene( &scene2 );
+    controller.addScene( &scene3 );
 
     while (!window.isClosed())
     {

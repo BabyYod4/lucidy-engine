@@ -6,8 +6,7 @@ namespace ly{
 #define DISABLE                         0
 #define ENABLE                          1
 
-#define SCENE_SELECTOR                  ENABLE
-
+#define SCENE_SELECTOR                  DISABLE
 
 /// OPENGL SPECIFIC
 #define OPENGL_VERSION_MAJOR            3
