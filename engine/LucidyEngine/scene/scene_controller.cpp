@@ -5,7 +5,8 @@ namespace ly {
 
 #if SCENE_SELECTOR == ENABLE
 
-    SceneController::SceneController(DebugWindow& t_debugWindow):
+
+    SceneController::SceneController(GuiWindow& t_debugWindow):
         m_delta(0.0f), m_currentTime(0.0f), m_lastTime(0.0f),
         m_debugWindow(t_debugWindow),
         m_currentScene(nullptr)
@@ -33,6 +34,7 @@ namespace ly {
             m_delta = m_currentTime - m_lastTime;
             m_lastTime = m_currentTime;
             m_currentScene->onUpdate(m_delta);
+            m_currentScene->onGuiRender();
         }
 
         handleSceneSelector();
@@ -51,6 +53,7 @@ namespace ly {
             m_delta = m_currentTime - m_lastTime;
             m_lastTime = m_currentTime;
             scene->onUpdate(m_delta);
+            scene->onGuiRender();
             scene->onExit();
         }
     }
@@ -71,6 +74,9 @@ namespace ly {
         for (Scene* scene : m_scenes){
             scene->onExit();
         }
+        #if SCENE_SELECTOR == ENABLE
+            delete m_currentScene;
+        #endif
     }
 
 

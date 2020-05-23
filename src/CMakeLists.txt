@@ -2,11 +2,11 @@ cmake_minimum_required( VERSION 2.8 )
 
 ## Sources and headers
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
-include_directories( ${__INCLUDE_PATH} )
+include_directories( ${PROJECT_SOURCE_DIR}/include )
 include_directories( ${PROJECT_SOURCE_DIR}/engine )
 
 ## Find all source and header files to be compiled into object files
-file( GLOB_RECURSE SOURCES *.cc *.hh *.cpp *.hpp *.c *.h *.inl )
+file( GLOB_RECURSE SOURCES *.cpp *.hpp *.c *.h *.inl )
 file( GLOB_RECURSE ENGINE_SOURCES ${PROJECT_SOURCE_DIR}/engine/*.cpp )
 
 
@@ -17,11 +17,14 @@ set_property(TARGET glew PROPERTY IMPORTED_LOCATION "${__LIB_PATH}/${__GLEW_LIB_
 add_library(glfw STATIC IMPORTED)
 set_property(TARGET glfw PROPERTY IMPORTED_LOCATION "${__LIB_PATH}/${__GLFW_LIB_NAME}")
 
-add_library(imgui STATIC IMPORTED)
-set_property(TARGET imgui PROPERTY IMPORTED_LOCATION "${__LIB_PATH}/libimgui.a")
+# add_library(imgui STATIC IMPORTED)
+# set_property(TARGET imgui PROPERTY IMPORTED_LOCATION "${__LIB_PATH}/libimgui.a")
 
 add_library(stb STATIC IMPORTED)
 set_property(TARGET stb PROPERTY IMPORTED_LOCATION "${__LIB_PATH}/libstb.a")
+
+file( GLOB_RECURSE IMGUI_SRC ${__LIB_PATH}/imgui/*.cpp )
+add_library(imgui STATIC ${IMGUI_SRC} )
 
 ## Find Required Packages
 find_package(OpenGL REQUIRED)
@@ -55,7 +58,7 @@ add_executable( ${MAIN_EXE_NAME} ${MAIN_SOURCE} ${SOURCES} ${ENGINE_SOURCES} )
 
 ## 2. Link...
 if (OS_TARGET_ MATCHES "Windows")
-    target_link_libraries( ${MAIN_EXE_NAME} glew glfw imgui ${OPENGL_gl_LIBRARY} stb )
+    target_link_libraries( ${MAIN_EXE_NAME} glew imgui glfw ${OPENGL_gl_LIBRARY} stb )
 endif()
 
 if (OS_TARGET_ MATCHES "Linux")

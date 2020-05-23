@@ -10,7 +10,8 @@ class Scene{
 public:
     virtual void onEntry(){};
     virtual void onExit(){};
-    virtual void onUpdate(const float_t& t_delta) = 0;
+    virtual void onUpdate(const float_t& t_delta){};
+    virtual void onGuiRender(){};
 
 #if SCENE_SELECTOR == ENABLE
     cstring_t getSceneName(){ return m_name.c_str(); }

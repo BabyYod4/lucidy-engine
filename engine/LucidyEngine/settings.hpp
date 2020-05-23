@@ -3,15 +3,19 @@
 
 namespace ly{
 
-#define DISABLE                         0
-#define ENABLE                          1
+/// Setting Values
+#define DISABLE                             0
+#define ENABLE                              1
+#define REALTIME                            0
+#define PASSIVE                             1
 
-#define SCENE_SELECTOR                  DISABLE
+/// Generic Settings
+#define SCENE_SELECTOR                      ENABLE
 
-/// OPENGL SPECIFIC
-#define OPENGL_VERSION_MAJOR            3
-#define OPENGL_VERSION_MINOR            2
-#define OPENGL_VERSION_USE_COMPAT       ENABLE
+/// OpenGL Settings
+#define OPENGL_VERSION_MAJOR                4
+#define OPENGL_VERSION_MINOR                1
+#define OPENGL_VERSION_USE_COMPAT           ENABLE
 
 }
 

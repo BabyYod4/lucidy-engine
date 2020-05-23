@@ -6,11 +6,12 @@
     "configurations": [
 
         {
-            "program": "cd bin; lucidy-engine.exe",
             "name": "C++ Launch",
             "type": "cppdbg",
             "request": "launch",
             "preLaunchTask": "debugRun",
+            "program": "${workspaceRoot}/build/windows/bin/lucidy-engine.exe",
+            "cwd": "${workspaceRoot}/build/windows/bin",
             "args": [],
             "stopAtEntry": false,
             "environment": [],
@@ -24,7 +25,11 @@
                         "ignoreFailures": true
                     }
                 ],
-                "program": "cd bin && lucidy-engine",
+                "cwd": "${workspaceRoot}/build/linux/bin",
+                "program": "lucidy-engine",
+            },
+            "windows": {
+                "miDebuggerPath": "C:/MinGW/x64/mingw64/bin/gdb.exe"
             }
         }
     ]

@@ -58,8 +58,9 @@ namespace ly{
     }
 
     void NormalWindow::close() {
+        glfwDestroyWindow(m_window);
         glfwTerminate();
-        std::cout << "Sucessfully destroyed NormalWindow" << std::endl;
+        std::cout << "Normal window Closed succesfully! " << std::endl;
     }
 
     bool NormalWindow::isClosed() {

@@ -3,7 +3,7 @@
 
 #include "scene.hpp"
 #include "../settings.hpp"
-#include "../window/debug_window.hpp"
+#include "../window/gui_window.hpp"
 #include "../generic/stack.hpp"
 
 namespace ly {
@@ -12,7 +12,7 @@ namespace ly {
     public:
 
     #if SCENE_SELECTOR == ENABLE
-        SceneController(DebugWindow& t_debugWindow);
+        SceneController(GuiWindow& t_debugWindow);
     #else
         SceneController();
     #endif 
@@ -27,7 +27,7 @@ namespace ly {
         SmartStack<Scene*> m_scenes;
 
     #if SCENE_SELECTOR == ENABLE
-        DebugWindow& m_debugWindow;
+        GuiWindow& m_debugWindow;
         Scene* m_currentScene;
         void handleSceneSelector();
     #endif

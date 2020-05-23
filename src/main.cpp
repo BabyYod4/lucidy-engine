@@ -9,7 +9,7 @@ int main(void)
     ly::MessageBus messageBus;
 
     ly::NormalWindow window( ly::WindowSettings{1280, 720, "The Wonders of Mazalt", 1, false} );
-    ly::DebugWindow debugWindow( window );
+    ly::GuiWindow debugWindow( window );
 
     window.open();
     ly::initGraphicLib();

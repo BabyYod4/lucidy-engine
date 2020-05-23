@@ -39,6 +39,7 @@
             "cStandard": "c11",
             "cppStandard": "gnu++11",
             "intelliSenseMode": "gcc-x64",
+            "compilerPath": "C:/MinGW/x64/mingw64/bin/g++.exe",
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""

@@ -6,7 +6,7 @@ namespace ly{
 
     /// ExampleReceiverScene
     ExampleReceiverScene::ExampleReceiverScene(
-        DebugWindow& t_debugWindow, 
+        GuiWindow& t_debugWindow, 
         MessageBus* t_messageBus, 
         cstring_t t_text
     ):
@@ -20,7 +20,7 @@ namespace ly{
         #endif 
     }
 
-    void ExampleReceiverScene::onUpdate(const float_t& t_delta) {
+    void ExampleReceiverScene::onGuiRender() {
         m_debugWindow.drawStart( m_text );
         m_debugWindow.drawText( m_message.c_str() );
         m_debugWindow.drawEnd();                      
@@ -36,7 +36,7 @@ namespace ly{
 
     /// ExampleSenderScene
     ExampleSenderScene::ExampleSenderScene(
-        DebugWindow& t_debugWindow, 
+        GuiWindow& t_debugWindow, 
         MessageBus* t_messageBus, 
         cstring_t t_text
     ):
@@ -49,17 +49,21 @@ namespace ly{
         #endif 
     }
 
-    void ExampleSenderScene::onUpdate(const float_t& t_delta) {
+    void ExampleSenderScene::onUpdate(const float_t& t_delta) { 
+        m_delta = t_delta;
+    }
+
+    void ExampleSenderScene::onGuiRender(){
         m_debugWindow.drawStart( m_text );
         bool pressed = m_debugWindow.drawButton("Click ME");
-        if (pressed){ sendMessage( Message(t_delta) ); }
+        if (pressed){ sendMessage( Message(m_delta) ); }
         m_debugWindow.drawEnd();    
     }
     /// ===============================================================================
 
 
     /// ExampleMouseEventScene
-    ExampleMouseScene::ExampleMouseScene(Window& t_window, DebugWindow& t_debugWindow):
+    ExampleMouseScene::ExampleMouseScene(Window& t_window, GuiWindow& t_debugWindow):
         m_window(t_window),
         m_debugWindow(t_debugWindow)
     {
@@ -68,7 +72,7 @@ namespace ly{
         #endif 
     }
 
-    void ExampleMouseScene::onUpdate(const float_t& t_delta) {
+    void ExampleMouseScene::onGuiRender(){
         m_debugWindow.drawStart( "Mouse Event Scene" );
         m_debugWindow.drawText( vec2ToString( m_window.getMousePos() ).c_str() );
         m_debugWindow.drawText( vec2ToString( m_window.getScrollLevel() ).c_str() );

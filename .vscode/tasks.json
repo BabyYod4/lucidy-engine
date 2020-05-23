@@ -47,11 +47,10 @@
             "dependsOrder": "sequence",
             "dependsOn": [
                 "cmakeTask",
-                "makeTask",
-                "executeTask"
+                "makeTask"
             ],
-            "linux": { "command": "cd bin && ./lucidy-engine" },
-            "windows": { "command": "cd bin; ./lucidy-engine.exe" },
+            "linux": { "command": "cd ../bin && ./lucidy-engine" },
+            "windows": { "command": "cd ../bin; ./lucidy-engine.exe" },
             "presentation": {
                 "reveal": "always",
                 "clear": true
