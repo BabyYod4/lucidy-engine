@@ -1,0 +1,13 @@
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/x64/CMakeFiles/install/local.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/x64/CMakeFiles/install.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/x64/CMakeFiles/edit_cache.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/x64/CMakeFiles/rebuild_cache.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/x64/CMakeFiles/list_install_components.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/x64/CMakeFiles/install/strip.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/bin/CMakeFiles/lucidy-engine.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/bin/CMakeFiles/install/local.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/bin/CMakeFiles/install.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/bin/CMakeFiles/edit_cache.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/bin/CMakeFiles/rebuild_cache.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/bin/CMakeFiles/list_install_components.dir
+C:/Development/Workspace/OpenGL/lucidy-engine/build/windows/bin/CMakeFiles/install/strip.dir

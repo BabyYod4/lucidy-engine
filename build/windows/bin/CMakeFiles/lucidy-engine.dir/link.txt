@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\lucidy-engine.dir/objects.a
+C:\MinGW\x64\mingw64\bin\ar.exe cr CMakeFiles\lucidy-engine.dir/objects.a @CMakeFiles\lucidy-engine.dir\objects1.rsp
+C:\MinGW\x64\mingw64\bin\g++.exe -Wextra -std=c++11 -pthread -g -O0   -Wl,--whole-archive CMakeFiles\lucidy-engine.dir/objects.a -Wl,--no-whole-archive  -o lucidy-engine.exe -Wl,--out-implib,liblucidy-engine.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\lucidy-engine.dir\linklibs.rsp

@@ -17,14 +17,14 @@ set_property(TARGET glew PROPERTY IMPORTED_LOCATION "${__LIB_PATH}/${__GLEW_LIB_
 add_library(glfw STATIC IMPORTED)
 set_property(TARGET glfw PROPERTY IMPORTED_LOCATION "${__LIB_PATH}/${__GLFW_LIB_NAME}")
 
-# add_library(imgui STATIC IMPORTED)
-# set_property(TARGET imgui PROPERTY IMPORTED_LOCATION "${__LIB_PATH}/libimgui.a")
+add_library(imgui STATIC IMPORTED)
+set_property(TARGET imgui PROPERTY IMPORTED_LOCATION "${__LIB_PATH}/libimgui.a")
 
 add_library(stb STATIC IMPORTED)
 set_property(TARGET stb PROPERTY IMPORTED_LOCATION "${__LIB_PATH}/libstb.a")
 
-file( GLOB_RECURSE IMGUI_SRC ${__LIB_PATH}/imgui/*.cpp )
-add_library(imgui STATIC ${IMGUI_SRC} )
+# file( GLOB_RECURSE IMGUI_SRC ${__LIB_PATH}/imgui/*.cpp )
+# add_library(imgui STATIC ${IMGUI_SRC} )
 
 ## Find Required Packages
 find_package(OpenGL REQUIRED)
