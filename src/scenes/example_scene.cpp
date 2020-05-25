@@ -15,9 +15,7 @@ namespace ly{
         m_message("No Messages Received"),
         m_debugWindow(t_debugWindow)
     {
-        #if SCENE_SELECTOR == ENABLE
         setSceneName( t_text );
-        #endif 
     }
 
     void ExampleReceiverScene::onGuiRender() {
@@ -44,9 +42,7 @@ namespace ly{
         m_text(t_text),
         m_debugWindow(t_debugWindow)
     {
-        #if SCENE_SELECTOR == ENABLE
         setSceneName( t_text );
-        #endif 
     }
 
     void ExampleSenderScene::onUpdate(const float_t& t_delta) { 
@@ -67,9 +63,7 @@ namespace ly{
         m_window(t_window),
         m_debugWindow(t_debugWindow)
     {
-        #if SCENE_SELECTOR == ENABLE
         setSceneName( "Mouse Event Scene" );
-        #endif 
     }
 
     void ExampleMouseScene::onGuiRender(){

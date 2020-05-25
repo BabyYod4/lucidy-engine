@@ -4,6 +4,8 @@
 #include <string>
 #include <cstring>
 #include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
 
 namespace ly{
 
@@ -17,6 +19,14 @@ namespace ly{
     typedef const char* cstring_t;
 
     typedef glm::vec2 vec2_t;
+    typedef glm::vec3 vec3_t;
+    typedef glm::vec4 vec4_t;
+
+    template<typename T>
+    class range_t{
+    public:
+        T start; T end;
+    };
 
     static inline bool cstrEqual( cstring_t t_left, cstring_t t_right ){
         if ( std::strcmp(t_left, t_right) == 0 ) {return true;}

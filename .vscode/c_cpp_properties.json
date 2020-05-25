@@ -4,9 +4,10 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/include/**", 
-                "${workspaceFolder}/src/**", 
+                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/src/**",
                 "${workspaceFolder}/lib/**",
+                "${workspaceFolder}/include/",
                 "${workspaceFolder}/.vscode/intelli_fix_cpp/c_cpp_includes/**"
             ],
             "defines": [
@@ -26,8 +27,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/include/**", 
-                "${workspaceFolder}/src/**", 
+                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/src/**",
                 "${workspaceFolder}/lib/**",
                 "${workspaceFolder}/.vscode/intelli_fix_cpp/c_cpp_includes/**"
             ],
