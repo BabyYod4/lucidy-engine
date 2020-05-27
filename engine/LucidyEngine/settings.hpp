@@ -11,8 +11,10 @@ namespace ly{
 
 /// Generic Settings
 #define SCENE_SELECTOR                          ENABLE
-const uint_t BATCH_VERTEX_BUFFER_SIZE =         1024*10e6;
-const uint_t BATCH_INDEX_BUFFER_SIZE =          1024*10e6;
+#define DEBUG_MODE                              ENABLE
+const uint_t BATCH_BUFFER_AMOUNT =              1;
+const size_t BATCH_VERTEX_BUFFER_SIZE =         10240000000;
+const size_t BATCH_INDEX_BUFFER_SIZE =          10240000000;
 
 
 /// OpenGL Settings

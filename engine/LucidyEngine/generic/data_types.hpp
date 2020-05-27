@@ -39,6 +39,6 @@ namespace ly{
         return buff;
     }
 
-;}
+}
 
 #endif // TYPES_HPP

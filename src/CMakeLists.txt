@@ -39,11 +39,11 @@ set( CMAKE_CXX_EXTENSIONS ON ) #...with compiler extensions like gnu++11
 
 ### Set custom flags
 if (OS_TARGET_ MATCHES "Windows")
-    set( CMAKE_CXX_FLAGS "-Wextra -std=c++11 -pthread" ) 
+    set( CMAKE_CXX_FLAGS "-Wextra -pedantic -Werror -std=c++11 -pthread" ) 
 endif()
 
 if (OS_TARGET_ MATCHES "Linux")
-    set( CMAKE_CXX_FLAGS "-Wextra -std=c++11 -ldl -pthread" ) 
+    set( CMAKE_CXX_FLAGS "-Wextra -pedantic -Werror -std=c++11 -ldl -pthread" ) 
 endif()
 
 ## Source file containing the "main" function

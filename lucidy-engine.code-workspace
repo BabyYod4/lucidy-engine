@@ -80,7 +80,7 @@
 			"**/lib": true,
 			"**/imgui.ini": true,
 			"**/.gitkeep/**": true,
-			"**/CMakeLists.txt/**": true
+			"**/CMakeLists.txt/**": false
 		}
 	},
 }

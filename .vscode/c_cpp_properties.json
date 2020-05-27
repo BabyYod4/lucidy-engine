@@ -3,7 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**",
+                "${workspaceFolder}/engine/**",
                 "${workspaceFolder}/include/**",
                 "${workspaceFolder}/src/**",
                 "${workspaceFolder}/lib/**",
@@ -26,8 +26,9 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
+                "${workspaceFolder}/engine/**",
                 "${workspaceFolder}/include/**",
+                "${workspaceFolder}/include/",
                 "${workspaceFolder}/src/**",
                 "${workspaceFolder}/lib/**",
                 "${workspaceFolder}/.vscode/intelli_fix_cpp/c_cpp_includes/**"
