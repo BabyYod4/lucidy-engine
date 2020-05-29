@@ -46,6 +46,7 @@ namespace ly{
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
         std::cout << "GUI window Closed succesfully! " << std::endl;
+        m_window.close();
     }
 
     void GuiWindow::clear() {

@@ -1,5 +1,5 @@
-#ifndef LIB_BASE_HPP
-#define LIB_BASE_HPP
+#ifndef GRAPHIC_LIB_HPP
+#define GRAPHIC_LIB_HPP
 
 #include <glew/glew.h>
 
@@ -53,7 +53,7 @@ namespace ly{
   #define DEBUG
 
   #if DEBUG_MODE == ENABLE
-    #define GLCALL(x) { _clearError(); x; ASSERT(_logCall(#x, __FILE__, __LINE__), ""); }
+    #define GLCALL(x) _clearError(); x; ASSERT(_logCall(#x, __FILE__, __LINE__), ""); 
   #else
     #define GLCALL(x) x
   #endif
@@ -70,4 +70,4 @@ namespace ly{
 
 }
 
-#endif // !LIB_BASE_HPP
+#endif // !GRAPHIC_LIB_HPP

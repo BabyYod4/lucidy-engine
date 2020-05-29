@@ -59,6 +59,7 @@ set(LIBRARY_OUTPUT_PATH ${__LIB_PATH})
 
 ## Set global definitions to be used in c++
 add_definitions(-DGLEW_STATIC)
+add_definitions(-DSANDBOX_PATH="${PROJECT_SOURCE_DIR}/src/")
 
 ## Link Subdirectory 
 add_subdirectory(${PROJECT_SOURCE_DIR}/src ${__BIN_PATH})

@@ -41,12 +41,18 @@ namespace ly{
         glfwSetCursorPosCallback(m_window, mousePosDataGet);
         glfwSetScrollCallback(m_window, mouseScrollDataGet);
         if(m_settings.captureMouse){ glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); }
+
+        glEnable(GL_BLEND);
+        // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);
+        glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_DEPTH_TEST);
         
         std::cout << "Sucessfully created NormalWindow" << std::endl;
     }
 
     void NormalWindow::clear() {
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0.3f, 0.2f, 0.4f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     void NormalWindow::flush(){

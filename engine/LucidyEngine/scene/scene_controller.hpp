@@ -19,12 +19,11 @@ namespace ly {
 
         ~SceneController();
         void addScene( Scene* t_scene );
-        void addOverlay( Scene* t_scene );
         void run();
 
     private:
         float_t m_delta, m_currentTime, m_lastTime;
-        SmartStack<Scene*> m_scenes;
+        std::vector<Scene*> m_scenes;
 
     #if SCENE_SELECTOR == ENABLE
         GuiWindow& m_debugWindow;

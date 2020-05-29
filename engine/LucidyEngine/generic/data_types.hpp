@@ -22,11 +22,9 @@ namespace ly{
     typedef glm::vec3 vec3_t;
     typedef glm::vec4 vec4_t;
 
-    template<typename T>
-    class range_t{
-    public:
-        T start; T end;
-    };
+    typedef struct range_t{ uint_t start; uint_t end; } range_t;
+
+    typedef struct ratio_t{ uint8_t num; uint8_t denum; } ratio_t;
 
     static inline bool cstrEqual( cstring_t t_left, cstring_t t_right ){
         if ( std::strcmp(t_left, t_right) == 0 ) {return true;}

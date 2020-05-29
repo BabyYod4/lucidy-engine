@@ -1,9 +1,15 @@
 #ifndef EXAMPLE_SCENE_HPP
 #define EXAMPLE_SCENE_HPP
 
+#include <LucidyEngine/shader/shader.hpp>
 #include <LucidyEngine/scene/scene.hpp>
 #include <LucidyEngine/window/gui_window.hpp>
 #include <LucidyEngine/message_bus/bus_node.hpp>
+#include <LucidyEngine/renderer/batch_renderer.hpp>
+#include <LucidyEngine/renderer/targets/brt_cube.hpp>
+#include <LucidyEngine/renderer/targets/brt_square.hpp>
+
+#include <array>
 
 namespace ly{
 
@@ -37,6 +43,17 @@ namespace ly{
     private:
         Window& m_window;
         GuiWindow& m_debugWindow;
+    };
+
+    class ExampleBRTScene : public Scene {
+    public:
+        ExampleBRTScene();
+        void onUpdate(const float_t& t_delta) override;
+    private:
+        BatchRenderer m_renderer;
+        BRTSquare m_square;
+        BRTCube m_cube;
+        Shader m_shader;
     };
 
 }

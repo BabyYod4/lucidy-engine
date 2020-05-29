@@ -74,13 +74,13 @@
 		"C_Cpp.errorSquiggles": "Enabled",
 		"files.exclude": {
 			"**/.gitignore": true,
-			"**/.vscode": true,
+			"**/.vscode": false,
 			"**/build": true,
 			"**/include": true,
 			"**/lib": true,
 			"**/imgui.ini": true,
 			"**/.gitkeep/**": true,
-			"**/CMakeLists.txt/**": false
+			"**/CMakeLists.txt/**": true
 		}
 	},
 }

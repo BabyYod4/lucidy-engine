@@ -6,8 +6,8 @@
 namespace ly{
 
     struct Vertex {
-        vec3_t pos;
-        vec4_t color;
+        float_t pos[3];
+        float_t color[4];
     };
 }
 

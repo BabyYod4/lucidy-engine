@@ -62,21 +62,16 @@ namespace ly {
 #endif
 
     void SceneController::addScene(Scene* t_scene) {
-        m_scenes.pushFront(t_scene);
+        m_scenes.push_back(t_scene);
     }
 
-    void SceneController::addOverlay(Scene* t_scene) {
-        m_scenes.pushBack(t_scene);
-    }
 
 
     SceneController::~SceneController() {
         for (Scene* scene : m_scenes){
             scene->onExit();
         }
-        #if SCENE_SELECTOR == ENABLE
-            delete m_currentScene;
-        #endif
+        m_debugWindow.close();
     }
 
 

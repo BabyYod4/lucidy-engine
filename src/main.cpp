@@ -4,6 +4,7 @@
 #include <LucidyEngine/window/normal_window.hpp>
 #include <scenes/example_scene.hpp>
 
+
 int main(void)
 {
     ly::MessageBus messageBus;
@@ -24,10 +25,12 @@ int main(void)
     ly::ExampleReceiverScene scene1( debugWindow, &messageBus, "Receiver Scene" );
     ly::ExampleSenderScene scene2( debugWindow, &messageBus, "Sender Scene" );
     ly::ExampleMouseScene scene3( window, debugWindow );
+    ly::ExampleBRTScene scene4;
 
     controller.addScene( &scene1 );
     controller.addScene( &scene2 );
     controller.addScene( &scene3 );
+    controller.addScene( &scene4 );
 
     while (!window.isClosed())
     {

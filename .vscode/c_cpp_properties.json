@@ -13,7 +13,8 @@
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "SANDBOX_PATH=\"\""
             ],
             "cStandard": "c11",
             "cppStandard": "gnu++11",
@@ -36,7 +37,8 @@
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "SANDBOX_PATH=\"\""
             ],
             "cStandard": "c11",
             "cppStandard": "gnu++11",

@@ -74,7 +74,26 @@ namespace ly{
     }
     /// ===============================================================================
 
+ExampleBRTScene::ExampleBRTScene():
+    m_square(1.3f)
+{
+    setSceneName( "BRTCube Scene" );
 
+    m_renderer.addTarget("cube", &m_cube);
+    m_renderer.addTarget("square", &m_square);
+    m_renderer.setDrawList( {"cube", "square" } );
+
+    m_shader.addFile( string_t(SANDBOX_PATH) + "assets/shaders/v_square.glsl", GL_VERTEX_SHADER );
+    m_shader.addFile( string_t(SANDBOX_PATH) + "assets/shaders/f_color.glsl", GL_FRAGMENT_SHADER );
+    m_shader.init();
+}
+
+void ExampleBRTScene::onUpdate(const float_t& t_delta) {
+    
+    m_shader.bind();
+    m_renderer.draw();
+    
+}
 
 } // Namespace END
 
