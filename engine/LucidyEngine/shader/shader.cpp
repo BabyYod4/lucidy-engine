@@ -53,22 +53,22 @@ namespace ly{
 		GLCALL( glDeleteProgram( renderId ) );
 	}
 
-	// void Shader::setUniform1i( const std::string& name, int_t value ) {
-	// 	GLCALL( glUniform1i( getUniformLocation( name ), value ) );
-	// }
+	void Shader::setUniform1i( const std::string& name, int_t value ) {
+		GLCALL( glUniform1i( getUniformLocation( name ), value ) );
+	}
 
-	// void Shader::setUniform1f( const std::string& name, float_t value ) {
-	// 	GLCALL( glUniform1f( getUniformLocation( name ), value ) );
-	// }
+	void Shader::setUniform1f( const std::string& name, float_t value ) {
+		GLCALL( glUniform1f( getUniformLocation( name ), value ) );
+	}
 
-	// void Shader::setUniform4f( const std::string& name, vec4f_t value ) {
-	// 	GLCALL( glUniform4f( getUniformLocation( name ), value.x, value.y, value.z, value.w ) );
-	// }
+	void Shader::setUniform4f( const std::string& name, vec4_t value ) {
+		GLCALL( glUniform4f( getUniformLocation( name ), value.x, value.y, value.z, value.w ) );
+	}
 
 
-	// void Shader::setUniformMat4f( const std::string& name, const mat4f_t& value ) {
-	// 	GLCALL( glUniformMatrix4fv( getUniformLocation( name ), 1, GL_FALSE, &value[0][0] ) );
-	// }
+	void Shader::setUniformMat4f( const std::string& name, const mat4_t& value ) {
+		GLCALL( glUniformMatrix4fv( getUniformLocation( name ), 1, GL_FALSE, &value[0][0] ) );
+	}
 
 	uint_t Shader::compileShader( enum_t type, const std::string& source ) {
 		GLCALL( uint_t id = glCreateShader( type ) );
@@ -94,18 +94,18 @@ namespace ly{
 		return id;
 	}
 
-	// int_t Shader::getUniformLocation( const std::string& name ) {
-	// 	if ( uniformLocationCache.find( name ) != uniformLocationCache.end() ) {
-	// 		return uniformLocationCache[ name ];
-	// 	}
+	int_t Shader::getUniformLocation( const std::string& name ) {
+		if ( uniformLocationCache.find( name ) != uniformLocationCache.end() ) {
+			return uniformLocationCache[ name ];
+		}
 
-	// 	GLCALL( int_t location = glGetUniformLocation( renderId, name.c_str() ) );
-	// 	if ( location == -1 ) {
-	// 		std::cout << "[Shader Warning] (Uniform with name'" << name << "' does not exist)" << std::endl;
-	// 	}
+		GLCALL( int_t location = glGetUniformLocation( renderId, name.c_str() ) );
+		if ( location == -1 ) {
+			std::cout << "[Shader Warning] (Uniform with name'" << name << "' does not exist)" << std::endl;
+		}
 		
-	// 	uniformLocationCache[ name ] = location;
-	// 	return location;
-	// }
+		uniformLocationCache[ name ] = location;
+		return location;
+	}
 
 }

@@ -27,8 +27,8 @@
 
         {
             "label": "cleanTask",
-            "linux":{ "command": "rm -rf *" },
-            "windows":{ "command": "Remove-Item * -Recurse -Force -Confirm:$false" },
+            "linux":{ "command": "rm -rf * !(.gitkeep) && rm -rf ../bin/* !(.gitkeep)" },
+            "windows":{ "command": "Remove-Item * -Recurse -Force -Exclude '.gitkeep' -Confirm:$false; Remove-Item ..\\bin\\* -Recurse -Force -Exclude '.gitkeep' -Confirm:$false; " },
             "problemMatcher": []
         },
 

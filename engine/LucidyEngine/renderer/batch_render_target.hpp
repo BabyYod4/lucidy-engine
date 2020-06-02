@@ -10,11 +10,13 @@
 namespace ly{
 
     typedef struct BRTSD { uint_t requiredVertices; uint_t requiredIndices; } BRTSetupData;
-    typedef struct BRTDD { uint_t batchNum; range_t offsetVb; range_t offsetIb; } BRTDrawData;
+    typedef struct BRTDD { range_t offsetVb; range_t offsetIb; } BRTDrawData;
     typedef struct BRTRD { string_t targetName; BRTDrawData drawData; BRTSetupData setupData; } BRTData;
     
     class BatchRenderTarget{
         public:
+            
+            virtual void destroy(){}
             virtual void setup(){};
             virtual void change(cstring_t t_changeCommand){}
 

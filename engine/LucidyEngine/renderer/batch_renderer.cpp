@@ -3,29 +3,24 @@
 #include <algorithm>
 #include <stddef.h>
 
-ly::BatchRenderer::BatchRenderer():
-    m_maxVertices(( (BATCH_RENDERER_BUFF_SIZE * BATCH_RENDERER_VB_RATIO.num) / BATCH_RENDERER_VB_RATIO.denum ) / sizeof(Vertex)  ),
-    m_maxIndices(( (BATCH_RENDERER_BUFF_SIZE * BATCH_RENDERER_IB_RATIO.num) / BATCH_RENDERER_IB_RATIO.denum ) / sizeof(uint_t) ),
-    allowRender(true), ibLoop(false), m_indexCount(0), m_batchCount(0)
+ly::BatchRenderer::BatchRenderer(const size_t& t_buffSizeBytes, const ratio_t& t_vbRatio, const ratio_t& t_ibRatio):
+    m_maxVertices(( (t_buffSizeBytes * t_vbRatio.num) / t_vbRatio.denum ) / sizeof(Vertex)  ),
+    m_maxIndices(( (t_buffSizeBytes * t_ibRatio.num) / t_ibRatio.denum ) / sizeof(uint_t) ),
+    allowRender(true)
  { initLayout(); }
 
-ly::BatchRenderer::~BatchRenderer() {}
+ly::BatchRenderer::~BatchRenderer() {
+    m_drawList.clear();
+    std::vector<BRTData>().swap(m_drawList);
+    for( const auto& e: m_renderTargets ){ e.second->destroy(); }
+    m_renderTargets.clear();
+    std::unordered_map<string_t, BatchRenderTarget*>().swap(m_renderTargets);
+}
 
 void ly::BatchRenderer::draw() {
     if (allowRender){
-
-        if( m_batchCount == 1) { 
-            applyBatch(1);
-            GLCALL( glBindVertexArray(m_vaRenderId) );
-            GLCALL( glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, nullptr ) ); 
-        }else{
-            for(uint_t i=1; i<=m_batchCount; i++){
-                applyBatch(i);
-                GLCALL( glBindVertexArray(m_vaRenderId) );
-                GLCALL( glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, nullptr ) ); 
-            }
-        }
-
+        GLCALL( glBindVertexArray(m_vaRenderId) );
+        GLCALL( glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, nullptr ) ); 
     }
 }
 
@@ -55,7 +50,7 @@ ly::bool_t ly::BatchRenderer::setDrawList(const std::vector<string_t>& t_targetN
         m_drawList.push_back( 
             BRTData{ 
                 t_targetNames[i], 
-                BRTDrawData{0, {0,0}, {0,0} }, 
+                BRTDrawData{ {0,0}, {0,0} }, 
                 m_renderTargets[ t_targetNames[i] ]->getSetupData() 
             } 
         );
@@ -63,12 +58,10 @@ ly::bool_t ly::BatchRenderer::setDrawList(const std::vector<string_t>& t_targetN
 
     std::sort( m_drawList.begin(), m_drawList.end(), BRTRankingMethod );
 
-    for( const auto& target: m_drawList ){
-        m_renderTargets[ target.targetName ]->setup();
-    }
-        
     if ( checkBatchSetup() ){
         allowRender = true;
+        for( const auto& target: m_drawList ){ m_renderTargets[ target.targetName ]->setup(); }
+        applyBatch();
     }else{
         allowRender = false;
     }
@@ -120,9 +113,14 @@ void ly::BatchRenderer::initLayout() {
 }
 
 bool ly::BatchRenderer::checkBatchSetup() {
-    // std::cout << "Required: " << m_drawList[0].targetName << std::endl;
 
     if ( m_drawList[0].setupData.requiredVertices > m_maxVertices ){
+        if (m_drawList.back().setupData.requiredVertices > m_maxVertices){
+            std::cerr << "Unable to setup Draw List because vertex requirment of smallest BRTTarget [" << m_drawList.back().targetName << "] is larger than the maximum buffer size per batch draw call! \r\n" 
+            << "\t - MaxBatchBufferSize: " << m_maxVertices * sizeof(Vertex) << " bytes" << "\r\n"
+            << "\t - BiggestRenderTargetSize: " << m_drawList.back().setupData.requiredVertices * sizeof(Vertex) << " bytes" << std::endl;
+            return false;
+        }
         std::cerr << "Unable to setup Draw List because vertex requirment of largest BRTTarget [" << m_drawList[0].targetName << "] is larger than the maximum buffer size per batch draw call! \r\n" 
             << "\t - MaxBatchBufferSize: " << m_maxVertices * sizeof(Vertex) << " bytes" << "\r\n"
             << "\t - BiggestRenderTargetSize: " << m_drawList[0].setupData.requiredVertices * sizeof(Vertex) << " bytes" << std::endl;
@@ -130,88 +128,61 @@ bool ly::BatchRenderer::checkBatchSetup() {
     }
 
     if ( m_drawList[0].setupData.requiredIndices > m_maxIndices ){
+        if (m_drawList.back().setupData.requiredIndices > m_maxIndices){
+            std::cerr << "Unable to setup Draw List because index requirment of smallest BRTTarget [" << m_drawList.back().targetName << "] is larger than the maximum buffer size per batch draw call! \r\n" 
+            << "\t - MaxBatchBufferSize: " << m_maxIndices * sizeof(uint_t) << " bytes" << "\r\n"
+            << "\t - BiggestRenderTargetSize: " << m_drawList.back().setupData.requiredIndices * sizeof(Vertex) << " bytes" << std::endl;
+            return false;
+        }
         std::cerr << "Unable to setup Draw List because index requirement of largest BRTTarget [" << m_drawList[0].targetName << "] is larger than the maximum buffer size per batch draw call!" 
             << "\t - MaxBatchBufferSize: " << m_maxIndices * sizeof(uint_t) << " bytes" << "\r\n"
             << "\t - BiggestRenderTargetSize: " << m_drawList[0].setupData.requiredIndices * sizeof(uint_t) << " bytes" << std::endl;
         return false;
     }
 
-    uint_t neededVB = 0, neededIB = 0;
-    uint_t batchNumVB = 1, batchNumIB = 1;    
-    for( const auto& target: m_drawList ){
-        if (neededVB >= m_maxVertices) { batchNumVB++; neededVB=0; }
-        if (neededIB >= m_maxIndices) { batchNumIB++; neededIB=0; }
-        neededVB += target.setupData.requiredVertices;
-        neededIB += target.setupData.requiredIndices;
-    }
-    
-    if (batchNumVB == batchNumIB){ 
-        ibLoop = false;
-        m_batchCount = batchNumVB; 
-    } else if (batchNumVB > batchNumIB){ 
-        ibLoop = false; 
-        m_batchCount = batchNumVB; 
-    } else if (batchNumVB < batchNumIB){
-        ibLoop = true;
-        m_batchCount = batchNumIB; 
-    }
 
-    uint_t batchNum = 1, needed=0;
-    for( auto& target: m_drawList ){
-        target.drawData.batchNum = batchNum;
-        
-        if ( ibLoop ){ 
-            needed += target.setupData.requiredIndices;
-            if (needed >= m_maxIndices ) { batchNum++; needed = 0; }
-        } else { 
-            needed += target.setupData.requiredVertices; 
-            if (needed >= m_maxVertices ) { batchNum++; needed = 0; }
-        }
-    }
-
+    if ( !drawListFits() ){ std::cerr << "Unable to setup Draw List because index and or vertex requirments are too large" << std::endl; }
 
     return true;
 
 }
 
-void ly::BatchRenderer::applyBatch(const uint_t t_batchNum) {
-
-    if (t_batchNum == 0){ return; }
-    
+void ly::BatchRenderer::applyBatch() {
+ 
+    m_indexCount = 0;
     uint_t offset = 0;
     uint_t required = 0;
     
-    std::vector<BRTData>::iterator start;
-    std::vector<BRTData>::iterator end;
-    if (m_batchCount == 1){
-        start = m_drawList.begin();
-        end = m_drawList.end();
-        m_indexCount = 0;
-    }else{
-        start = std::find_if (m_drawList.begin(), m_drawList.end(), [&t_batchNum](const BRTData& i)->bool_t{ return t_batchNum == i.drawData.batchNum; }  );
-        end = std::find_if (m_drawList.begin(), m_drawList.end(), [&t_batchNum](const BRTData& i)->bool_t{ return (t_batchNum + 1) == i.drawData.batchNum; }  );
-    }
-
     GLCALL(glBindBuffer(GL_ARRAY_BUFFER, m_vbRenderId));
 
-    std::for_each(start, end, [this, &offset, &required](BRTData& target){
+    for( auto& target: m_drawList){
         required = target.setupData.requiredVertices;
         GLCALL(glBufferSubData(GL_ARRAY_BUFFER, sizeof(Vertex) * offset, sizeof(Vertex) * required, m_renderTargets[target.targetName]->getVertexBuff() ));
         target.drawData.offsetVb.start = offset;
         offset += required;
         target.drawData.offsetVb.end = offset;
-    } );
+    }
 
     GLCALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibRenderId));
     offset = 0; required = 0;
 
-    std::for_each(start, end, [this, &offset, &required](BRTData& target){
+    for( auto& target: m_drawList){
         required = target.setupData.requiredIndices;
         GLCALL(glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint_t) * offset, sizeof(uint_t) * required, m_renderTargets[target.targetName]->getIndexBuff() ));
         target.drawData.offsetIb.start = offset;
         offset += required;
         target.drawData.offsetIb.end = offset;
         m_indexCount += required;
-    } );
+    }
 
 }
+
+ly::bool_t ly::BatchRenderer::drawListFits() {
+    size_t vertSize = 0, indSize = 0;
+    for( const auto& e: m_drawList){ 
+        vertSize += e.setupData.requiredVertices; 
+        indSize += e.setupData.requiredIndices;
+    }
+    return ( vertSize <= m_maxVertices ) && ( indSize <= m_maxIndices );
+}
+

@@ -6,6 +6,7 @@
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
 
 namespace ly{
 
@@ -21,6 +22,8 @@ namespace ly{
     typedef glm::vec2 vec2_t;
     typedef glm::vec3 vec3_t;
     typedef glm::vec4 vec4_t;
+
+    typedef glm::mat4 mat4_t;
 
     typedef struct range_t{ uint_t start; uint_t end; } range_t;
 

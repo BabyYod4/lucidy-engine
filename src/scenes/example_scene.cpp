@@ -1,6 +1,7 @@
 #include "example_scene.hpp"
 #include <LucidyEngine/generic/logging.hpp>
 #include <LucidyEngine/generic/data_types.hpp>
+#include <LucidyEngine/generic/math.hpp>
 
 namespace ly{
 
@@ -75,6 +76,7 @@ namespace ly{
     /// ===============================================================================
 
 ExampleBRTScene::ExampleBRTScene():
+    m_renderer(4096, {2,3}, {1,3} ),
     m_square(1.3f)
 {
     setSceneName( "BRTCube Scene" );
@@ -86,11 +88,23 @@ ExampleBRTScene::ExampleBRTScene():
     m_shader.addFile( string_t(SANDBOX_PATH) + "assets/shaders/v_square.glsl", GL_VERTEX_SHADER );
     m_shader.addFile( string_t(SANDBOX_PATH) + "assets/shaders/f_color.glsl", GL_FRAGMENT_SHADER );
     m_shader.init();
+
+    glm::mat4 model         = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+    glm::mat4 view          = glm::mat4(1.0f);
+    glm::mat4 projection    = glm::mat4(1.0f);
+    model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -5.0f));
+    view  = glm::rotate(view, glm::radians(-45.0f), glm::vec3(0.0f, 1.0f, 1.0f) );
+    projection = glm::perspective(glm::radians(45.0f), (float)1280 / (float)720, 0.1f, 100.0f);
+
+    m_shader.bind();
+    m_shader.setUniformMat4f("model", model);
+	m_shader.setUniformMat4f("view", view);
+	m_shader.setUniformMat4f("projection", projection);
+    
 }
 
 void ExampleBRTScene::onUpdate(const float_t& t_delta) {
-    
-    m_shader.bind();
     m_renderer.draw();
     
 }

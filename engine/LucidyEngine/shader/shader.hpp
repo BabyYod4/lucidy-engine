@@ -22,14 +22,14 @@ namespace ly{
 		void bind() const;
 		void unbind() const;
 
-		// void setUniform1i( const std::string& name, int_t value );
-		// void setUniform1f(const std::string& name, float_t value);
-		// void setUniform4f( const std::string& name, vec4_t value );
-		// void setUniformMat4f( const std::string& name, const mat4f_t& value );
+		void setUniform1i( const std::string& name, int_t value );
+		void setUniform1f(const std::string& name, float_t value);
+		void setUniform4f( const std::string& name, vec4_t value );
+		void setUniformMat4f( const std::string& name, const mat4_t& value );
 
 	private:
 		uint_t renderId;
-		// std::unordered_map<std::string, int_t> uniformLocationCache;
+		std::unordered_map<std::string, int_t> uniformLocationCache;
 
 		std::vector<enum_t> shaderTypes;
 		std::vector<uint_t> shaderNums;

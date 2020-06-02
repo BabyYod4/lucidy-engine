@@ -75,12 +75,15 @@
 		"files.exclude": {
 			"**/.gitignore": true,
 			"**/.vscode": false,
-			"**/build": true,
+			"**/build": false,
 			"**/include": true,
 			"**/lib": true,
 			"**/imgui.ini": true,
 			"**/.gitkeep/**": true,
-			"**/CMakeLists.txt/**": true
+			"**/CMakeLists.txt/**": true,
+			"**LICENSE": true,
+			"**README.md": true,
+
 		}
 	},
 }

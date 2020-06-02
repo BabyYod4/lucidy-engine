@@ -42,10 +42,9 @@ namespace ly{
         glfwSetScrollCallback(m_window, mouseScrollDataGet);
         if(m_settings.captureMouse){ glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); }
 
-        glEnable(GL_BLEND);
-        // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);
-        glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glDepthFunc(GL_LESS);
         
         std::cout << "Sucessfully created NormalWindow" << std::endl;
     }
