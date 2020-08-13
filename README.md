@@ -1,6 +1,6 @@
 # Lucidy Engine 
 
-![Main Logo Lucidy](https://user-images.githubusercontent.com/59289792/82435068-0ea8c400-9a94-11ea-9581-3ffc61f56a7c.png)
+![Lucidy Engine](https://user-images.githubusercontent.com/59289792/90126929-b3216600-dd64-11ea-8184-2ebc7cd2ed07.png)
 
 This is a personal effort to create a simulation engine in modern C++ code targeted at scientists without any programming experience. 
 
